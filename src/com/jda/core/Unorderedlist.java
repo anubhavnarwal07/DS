@@ -5,13 +5,21 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Unorderedlist {
-public static void main(String args[]) throws FileNotFoundException
-{  File file = new File ("/home/bridgelabz/Desktop/Godly");
-Scanner in = new Scanner(file);
-while(in.hasNextLine())
-{ System.out.print(in.nextLine());
-} 
-System.out.println("Please enter a word to search");
-}
-}
-	
+		public static void main(String[] args) throws FileNotFoundException {
+			File file = new File("/home/bridgelabz/Desktop/Godly");
+			Linklist<String> allWords = new Linklist<String>();
+			String[] words = allWords.readFromFile(file);
+			for (int i = 0; i < words.length; i++) {
+				allWords.append(words[i]);
+			}
+			System.out.println("\nEnter the word to be searched:");
+			Linklist obj2 = new Linklist();
+			String key = obj2.getString();
+			if (allWords.search(key)) {
+				allWords.remove(key);
+			} else {
+				allWords.append(key);
+			} 
+			allWords.writeToCsvFile(file);
+		}
+	}
